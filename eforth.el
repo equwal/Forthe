@@ -14,10 +14,12 @@
 	       (push i s))))))
 (defmacro eforth (lang list)
   `(inner-eforth ,lang ',list))
-(defvar *my-env* '((ff . find-file)))
-(eforth *my-env* ("~/bogus/" ff))
-(eforth '((d . split-window-below))
-	(d))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (defvar *my-env* '((ff . find-file)))        ;;
+;; (eforth *my-env* ("~/bogus/" ff))	        ;;
+;; (eforth '((d . split-window-below))	        ;;
+;; 	(d))				        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun 8pan ()
   (interactive)
   (eforth '((n . (lambda () (switch-to-buffer nil)))
