@@ -5,7 +5,9 @@
 (defun inner-eforth (lang list)
   "Forth without a return stack."
   (let ((s))
-    (labels ((fn (fn) (if (symbolp fn) (symbol-function fn) fn)))
+    (labels ((fn (fn) (if (functionp fn)
+			  fn
+			  (symbol-function fn))))
       (dolist (i list)
 	(if (assoc i lang)
 	    (let ((fn (cdr (assoc i lang))))
@@ -33,9 +35,9 @@
 	   (del . delete-other-windows)
 	   (cf . make-frame-command)
 	   (nf . other-frame))
-	  (cf del r r wr wr r d wr d wl wl d wl d wr n wr n wr n wl wl wl wd n
-	      wr n wr n wr n wl wl wl wu nf)
-	  ;; (cf del r r wr wr r d wr d wl wl d wl d
-	  ;;      n wr n wr n wr n wd n wl n wl n wl n wu)
+	  ;; (cf nf del r r wr wr r d wr d wl wl d wl d wr n wr n wr n wl wl wl wd n
+	  ;;     wr n wr n wr n wl wl wl wu nf)
+	  (cf del r r wr wr r d wr d wl wl d wl d
+	       n wr n wr n wr n wd n wl n wl n wl n wu)
 	  ))
 (provide 'eforth)
