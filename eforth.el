@@ -4,14 +4,15 @@
       (push (list it i) l))))
 (defun inner-eforth (lang list)
   "Forth without a return stack."
-  (progn (let ((s) (l))
-	   (dolist (i list (nreverse (add-to-each 'funcall l)))
-	     (if (assoc i lang)
-		 (let ((fn (cdr (assoc i lang))))
-		   (if s
-		       (progn (apply (symbol-function fn) s) (setf s nil))
-		     (funcall (symbol-function fn))))
-	       (push i s))))))
+  (let ((s))
+    (labels ((fn (fn) (if (symbolp fn) (symbol-function fn) fn)))
+      (dolist (i list)
+	(if (assoc i lang)
+	    (let ((fn (cdr (assoc i lang))))
+	      (if s
+		  (progn (apply (fn fn) s) (setf s nil))
+		(funcall (fn fn))))
+	  (push i s))))))
 (defmacro eforth (lang list)
   `(inner-eforth ,lang ',list))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -33,5 +34,8 @@
 	   (cf . make-frame-command)
 	   (nf . other-frame))
 	  (cf del r r wr wr r d wr d wl wl d wl d wr n wr n wr n wl wl wl wd n
-	       wr n wr n wr n wl wl wl wu nf)))
+	      wr n wr n wr n wl wl wl wu nf)
+	  ;; (cf del r r wr wr r d wr d wl wl d wl d
+	  ;;      n wr n wr n wr n wd n wl n wl n wl n wu)
+	  ))
 (provide 'eforth)
