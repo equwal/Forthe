@@ -16,17 +16,17 @@ example:
 (defun 8pan ()
   (interactive)
   (eforth '((n . (lambda () (switch-to-buffer nil)))
-	   (d . split-window-below)
-	   (r . split-window-right)
-	   (wr . windmove-right)
-	   (wl . windmove-left)
-	   (wd . windmove-down)
-	   (wu . windmove-up)
-	   (del . delete-other-windows)
-	   (cf . make-frame-command)
-	   (nf . other-frame))
-	  (cf del r r wr wr r d wr d wl wl d wl d wr n wr n wr n wl wl wl wd n
-	       wr n wr n wr n wl wl wl wu nf)))
+	        (d . split-window-below)
+	        (r . split-window-right)
+	        (wr . windmove-right)
+	        (wl . windmove-left)
+	        (wd . windmove-down)
+	        (wu . windmove-up)
+	        (del . delete-other-windows)
+	        (cf . make-frame-command)
+	        (nf . other-frame))
+	  (cf del r r wr wr r d wr d wl wl d wl d wr n 
+          wr n wr n wl wl wl wd n wr n wr n wr n wl wl wl wu nf)))
 
 ```
 
