@@ -5,7 +5,7 @@
 
 Docs available as: [[https://spensertruex.com/eforth][HTML]] | [[https://github.com/equwal/eforth/blob/master/README.org][ORG-mode]] | [[https://github.com/equwal/eforth/blob/master/eforth.el][Plain Text]]
 
-Code on [[https://githu.com/equwal/eforth][github]]
+Code on [[https://github.com/equwal/eforth][github]]
 
 This is an implementation of an elisp-based FORTH. This means that elisp
 is used to write the function definitions. In fact, no FORTH function
