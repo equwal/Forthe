@@ -13,6 +13,9 @@
 ;; Licensed with the GNU GPL v3 see:
 ;; <https://www.gnu.org/licenses/>.
 ;;; Commentary:
+;; Version 0.0.1
+;;
+;; Docs available as: HTML | PDF | Plain Text
 ;;
 ;; This is an implementation of an elisp-based FORTH. This means that elisp
 ;; is used to write the function definitions. In fact, no FORTH function
@@ -58,28 +61,6 @@
 ;; miniature language with 1 or 2 letter abbreviations for each. Any
 ;; arguments to a function can be passed before it in the list, and there
 ;; is no need to define a return stack.
-;;
-;;
-;;
-;; USAGE: EXAMPLE:
-;;
-;;
-;; (require 'eforth)
-;; (defun 8pan ()
-;;   (interactive)
-;;   (eforth '((n . (lambda () (switch-to-buffer nil)))
-;;             (d . split-window-below)
-;;             (r . split-window-right)
-;;             (wr . windmove-right)
-;;             (wl . windmove-left)
-;;             (wd . windmove-down)
-;;             (wu . windmove-up)
-;;             (del . delete-other-windows)
-;;             (cf . make-frame-command)
-;;             (nf . other-frame))
-;;           (cf del r r wr wr r d wr d wl wl d wl d wr n
-;;               wr n wr n wl wl wl wd n wr n wr n wr n wl
-;;               wl wl wu nf)))
 ;;
 ;; M-x 8pan will produce a new frame with eight panels (emacs-speak:
 ;;                                                      "windows"). Here is how it works:
@@ -129,12 +110,23 @@
 ;;
 ;; eForth is not stable
 ;;
+;; Forth is space-age technology, and eForth is young. Send a pull request.
+;;
 ;;
 ;; Isn't verbose code self-documenting?
 ;;
 ;; NO. Documented code is documented. Using short names with the bindings
 ;; handily available in the same form is equally explicit as writing them
 ;; out every time.
+;;
+;;
+;;
+;; CONTRIBUTING
+;;
+;;
+;; Please make sure your contributions are melpa-friendly, and documented
+;; in the README. You can use pandoc-mode to transform the README.org into
+;; plaintext `;;; Commentary:`.
 
 ;;; Code:
 (require 'cl-lib)
@@ -163,4 +155,4 @@ LIST is the forth's stack."
 
 (provide 'eforth)
 
-;Internal function for the `eforth' macro.ends here
+                                        ;Internal function for the `eforth' macro.ends here
