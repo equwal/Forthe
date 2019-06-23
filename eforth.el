@@ -15,7 +15,9 @@
 ;;; Commentary:
 ;; Version 0.0.1
 ;;
-;; Docs available as: HTML | PDF | Plain Text
+;; Docs available as: HTML | ORG-mode | Plain Text
+;;
+;; Code on github
 ;;
 ;; This is an implementation of an elisp-based FORTH. This means that elisp
 ;; is used to write the function definitions. In fact, no FORTH function
@@ -26,16 +28,16 @@
 ;; (require 'eforth)
 ;; (defun 8pan ()
 ;;   (interactive)
-;;   (eforth '((n . (lambda () (switch-to-buffer nil)))
-;;             (d . split-window-below)
-;;             (r . split-window-right)
-;;             (wr . windmove-right)
-;;             (wl . windmove-left)
-;;             (wd . windmove-down)
-;;             (wu . windmove-up)
-;;             (del . delete-other-windows)
-;;             (cf . make-frame-command)
-;;             (nf . other-frame))
+;;   (eforth '((n (lambda () (switch-to-buffer nil)))
+;;             (d split-window-below)
+;;             (r split-window-right)
+;;             (wr windmove-right)
+;;             (wl windmove-left)
+;;             (wd windmove-down)
+;;             (wu windmove-up)
+;;             (del delete-other-windows)
+;;             (cf make-frame-command)
+;;             (nf other-frame))
 ;;           (cf del r r wr wr r d wr d wl wl d wl d wr n
 ;;               wr n wr n wl wl wl wd n wr n wr n wr n wl
 ;;               wl wl wu nf)))
@@ -127,6 +129,7 @@
 ;; Please make sure your contributions are melpa-friendly, and documented
 ;; in the README. You can use pandoc-mode to transform the README.org into
 ;; plaintext `;;; Commentary:`.
+;;
 
 ;;; Code:
 (require 'cl-lib)
