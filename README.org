@@ -87,5 +87,5 @@ available in the same form is equally explicit as writing them out every time.
 
 * Contributing
 Please make sure your contributions are  [[https://github.com/melpa/melpa/blob/master/CONTRIBUTING.org][melpa]]-friendly, and documented in the
-README. You can use [[http://joostkremers.github.io/pandoc-mode/][pandoc-mode]] to transform the README.org into plaintext `;;;
-Commentary:`.
+README. You can use [[http://joostkremers.github.io/pandoc-mode/][pandoc-mode]] to transform the README.org into plaintext =;;;
+Commentary:=.
