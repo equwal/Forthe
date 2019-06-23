@@ -55,7 +55,8 @@ stack.
             (cf . make-frame-command)
             (nf . other-frame))
           (cf del r r wr wr r d wr d wl wl d wl d wr n
-              wr n wr n wl wl wl wd n wr n wr n wr n wl wl wl wu nf)))
+              wr n wr n wl wl wl wd n wr n wr n wr n wl
+              wl wl wu nf)))
 #+END_SRC
 =M-x 8pan= will produce a new frame with eight panels (emacs-speak:
 "windows"). Here is how it works:
@@ -85,9 +86,6 @@ org--insert-structure-template-unique-keys
 #+END_SRC
 (a real function in the org mode) result in extremely verbose code. Using short,
 lexical names can reduce code size by a large portion.
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-#+END_SRC
 ** Compiles to Elisp.
 Elisp is hated by many, and for good reason. It is an outdated and clunky lisp.
 Many have tried and failed to port Emacs to Common Lisp, without success. Forth,
