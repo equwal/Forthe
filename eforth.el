@@ -132,23 +132,19 @@
 ;;
 
 ;;; Code:
-(require 'cl-lib)
 
 (defun eforth--inner (lang list)
   "Internal function for the `eforth' macro.
 LANG are the bindings for the forth.
 LIST is full of the forth stack (RPN)."
-  (let ((s))
-    (cl-flet ((fn (fn) (if (functionp fn)
-                           fn
-                         (symbol-function fn))))
-      (dolist (i list)
-        (if (assoc i lang)
-            (let ((fn (cadr (assoc i lang))))
-              (if s
-                  (progn (apply (fn fn) s) (setf s nil))
-                (funcall (fn fn))))
-          (push i s))))))
+  (let (s)
+    (dolist (i list)
+      (if (assoc i lang)
+          (let ((fn (cadr (assoc i lang))))
+            (if s
+                (progn (apply fn s) (setf s nil))
+              (funcall fn)))
+        (push i s)))))
 
 (defmacro eforth (lang list)
   "Define and execute a forth language.
