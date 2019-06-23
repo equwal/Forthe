@@ -10,18 +10,6 @@ definitions are provided at all to the eForth macro from the library.
 The main benefit comes from reducing the verbosity of elisp in a small
 Domain Specific Language the programmer defines.
 
-* How? Forth code is
-gone through by the pointer moving through the call stack. When a
-non-function is found, it is added to the argument stack. When a
-function is found, it uses up the argument stack if it has arguments, or
-just runs if it is nullary. Nothing else is provided by the
-implementation. # Why? Needing to simulate a long set of keypresses to
-create an eight panel frame (37 in total), the best option seemeed to be
-obviously to create a miniature language with 1 or 2 letter
-abbreviations for each. Any arguments to a function can be passed before
-it in the list, and there is no need to define a return stack. # Usage:
-example:
-
 #+BEGIN_SRC emacs-lisp :tangle no
 (require 'eforth)
 (defun 8pan ()
@@ -40,6 +28,35 @@ example:
               wr n wr n wl wl wl wd n wr n wr n wr n wl wl wl wu nf)))
 #+END_SRC
 
+* How does a FORTH work?
+Forth code is gone through by the pointer moving through the call stack. When a
+non-function is found, it is added to the argument stack. When a function is
+found, it uses up the argument stack if it has arguments, or just runs if it is
+nullary. Nothing else is provided by the implementation.
+* Why?
+Needing to simulate a long set of keypresses to create an eight panel frame (37
+in total), the best option seemeed to be obviously to create a miniature
+language with 1 or 2 letter abbreviations for each. Any arguments to a function
+can be passed before it in the list, and there is no need to define a return
+stack.
+* Usage: example:
+#+BEGIN_SRC emacs-lisp :tangle no
+(require 'eforth)
+(defun 8pan ()
+  (interactive)
+  (eforth '((n . (lambda () (switch-to-buffer nil)))
+            (d . split-window-below)
+            (r . split-window-right)
+            (wr . windmove-right)
+            (wl . windmove-left)
+            (wd . windmove-down)
+            (wu . windmove-up)
+            (del . delete-other-windows)
+            (cf . make-frame-command)
+            (nf . other-frame))
+          (cf del r r wr wr r d wr d wl wl d wl d wr n
+              wr n wr n wl wl wl wd n wr n wr n wr n wl wl wl wu nf)))
+#+END_SRC
 =M-x 8pan= will produce a new frame with eight panels (emacs-speak:
 "windows"). Here is how it works:
 
@@ -79,6 +96,7 @@ compiler is in fact a trivial exercise.
 
 * Drawbacks
 ** Elispers might not want to read your eFORTH code
+** eForth is not stable
 ** Isn't verbose code self-documenting?
 NO. Documented code is documented. Using short names with the bindings handily
 available in the same form is equally explicit as writing them out every time.
