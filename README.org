@@ -1,0 +1,84 @@
+#+TITLE: eForth
+#+AUTHOR: Spenser Truex
+#+EMAIL: web@spensertruex.com
+
+**** Version 0.0.1
+
+This is an implementation of an elisp-based FORTH. This means that elisp
+is used to write the function definitions. In fact, no FORTH function
+definitions are provided at all to the eForth macro from the library.
+The main benefit comes from reducing the verbosity of elisp in a small
+Domain Specific Language the programmer defines.
+
+* How? Forth code is
+gone through by the pointer moving through the call stack. When a
+non-function is found, it is added to the argument stack. When a
+function is found, it uses up the argument stack if it has arguments, or
+just runs if it is nullary. Nothing else is provided by the
+implementation. # Why? Needing to simulate a long set of keypresses to
+create an eight panel frame (37 in total), the best option seemeed to be
+obviously to create a miniature language with 1 or 2 letter
+abbreviations for each. Any arguments to a function can be passed before
+it in the list, and there is no need to define a return stack. # Usage:
+example:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(require 'eforth)
+(defun 8pan ()
+  (interactive)
+  (eforth '((n . (lambda () (switch-to-buffer nil)))
+            (d . split-window-below)
+            (r . split-window-right)
+            (wr . windmove-right)
+            (wl . windmove-left)
+            (wd . windmove-down)
+            (wu . windmove-up)
+            (del . delete-other-windows)
+            (cf . make-frame-command)
+            (nf . other-frame))
+          (cf del r r wr wr r d wr d wl wl d wl d wr n
+              wr n wr n wl wl wl wd n wr n wr n wr n wl wl wl wu nf)))
+#+END_SRC
+
+=M-x 8pan= will produce a new frame with eight panels (emacs-speak:
+"windows"). Here is how it works:
+
+=eforth= is called with two arguments: the environment, name to function
+bindings, and the eforth code list. You can see in this example that
+there are no arguments used, since all of these are nullary functions.
+Here is how you might use arguments:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(eforth '((ff . find-file)) ("~/some-file" ff))
+#+END_SRC
+
+Here we ran =(find-file "~/some-file")=. If you need to reuse a forth,
+just define an =*env*= variable:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(defvar *env* '((>r . to-return-stack) ...))
+(eforth *env* (forth code here ...))
+#+END_SRC
+
+* Benefits
+** Concise code.
+Elisp's convention of names like:
+#+BEGIN_SRC emacs-lisp :tangle yes
+org--insert-structure-template-unique-keys
+#+END_SRC
+(a real function in the org mode) result in extremely verbose code. Using short,
+lexical names can reduce code size by a large portion.
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+#+END_SRC
+** Compiles to Elisp.
+Elisp is hated by many, and for good reason. It is an outdated and clunky lisp.
+Many have tried and failed to port Emacs to Common Lisp, without success. Forth,
+unlike modern lisps, is designed to be easy to implement. Writing a forth
+compiler is in fact a trivial exercise.
+
+* Drawbacks
+** Elispers might not want to read your eFORTH code
+** Isn't verbose code self-documenting?
+NO. Documented code is documented. Using short names with the bindings handily
+available in the same form is equally explicit as writing them out every time.
