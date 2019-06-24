@@ -1,7 +1,12 @@
-#+TITLE: eForth
+#+TITLE: Forthe
 #+AUTHOR: Spenser Truex
 #+EMAIL: web@spensertruex.com
-**** Version 0.0.1
+#+BEGIN_QUOTE
+Go [F]orth[e] and thee shall find.
+#+END_QUOTE
+
+FORTheElisp
+**** Version 0.0.2
 
 Docs available as: [[https://spensertruex.com/eforth][HTML]] | [[https://github.com/equwal/eforth/blob/master/README.org][ORG-mode]] | [[https://github.com/equwal/eforth/blob/master/eforth.el][Plain Text]]
 
@@ -9,15 +14,15 @@ Code on [[https://github.com/equwal/eforth][github]]
 
 This is an implementation of an elisp-based FORTH. This means that elisp
 is used to write the function definitions. In fact, no FORTH function
-definitions are provided at all to the eForth macro from the library.
+definitions are provided at all to the Forthe macro from the library.
 The main benefit comes from reducing the verbosity of elisp in a small
 Domain Specific Language the programmer defines.
 
 #+BEGIN_SRC emacs-lisp :tangle no
-(require 'eforth)
+(require 'forthe)
 (defun 8pan ()
   (interactive)
-  (eforth '((n (lambda () (switch-to-buffer nil)))
+  (forthe '((n (lambda () (switch-to-buffer nil)))
             (d split-window-below)
             (r split-window-right)
             (wr windmove-right)
@@ -46,27 +51,27 @@ stack.
 =M-x 8pan= will produce a new frame with eight panels (emacs-speak:
 "windows"). Here is how it works:
 
-=eforth= is called with two arguments: the environment, name to function
-bindings, and the eforth code list. You can see in this example that
+=forthe= is called with two arguments: the environment, name to function
+bindings, and the Forthe code list. You can see in this example that
 there are no arguments used, since all of these are nullary functions.
 Here is how you might use arguments:
 
 #+BEGIN_SRC emacs-lisp :tangle no
-(eforth '((ff . find-file)) ("~/some-file" ff))
+(forthe '((ff . find-file)) ("~/some-file" ff))
 #+END_SRC
 
-Here we ran =(find-file "~/some-file")=. If you need to reuse a forth,
+Here we ran =(find-file "~/some-file")=. If you need to reuse a FORTH,
 just define an =*env*= variable:
 
 #+BEGIN_SRC emacs-lisp :tangle no
 (defvar *env* '((>r . to-return-stack) ...))
-(eforth *env* (forth code here ...))
+(forthe *env* (forth code here ...))
 #+END_SRC
 
 * Benefits
 ** Concise code.
 Elisp's convention of names like:
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle no
 org--insert-structure-template-unique-keys
 #+END_SRC
 (a real function in the org mode) result in extremely verbose code. Using short,
@@ -74,13 +79,13 @@ lexical names can reduce code size by a large portion.
 ** Compiles to Elisp.
 Elisp is hated by many, and for good reason. It is an outdated and clunky lisp.
 Many have tried and failed to port Emacs to Common Lisp, without success. Forth,
-unlike modern lisps, is designed to be easy to implement. Writing a forth
+unlike modern lisps, is designed to be easy to implement. Writing a FORTH
 compiler is in fact a trivial exercise.
 
 * Drawbacks
-** Elispers might not want to read your eFORTH code
-** eForth is not stable
-Forth is [[http://www.flownet.com/gat/jpl-lisp.html][space-age technology]], and eForth is young. Send a pull request.
+** Elispers might not want to read your Forthe code
+** Forthe is not stable
+   FORTH is [[http://www.flownet.com/gat/jpl-lisp.html][space-age technology]], and Forthe is young. Send a pull request.
 ** Isn't verbose code self-documenting?
 NO. Documented code is documented. Using short names with the bindings handily
 available in the same form is equally explicit as writing them out every time.
