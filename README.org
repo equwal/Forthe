@@ -3,7 +3,7 @@
 #+EMAIL: web@spensertruex.com
 
 #+BEGIN_QUOTE
-Go [F]orth[e] and thee shall find.
+Go Forth[e] and ye shall find.
 #+END_QUOTE
 
 **** Version 0.0.2
